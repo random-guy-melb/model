@@ -72,9 +72,7 @@ class RAG(DataProcessing):
                 schema=self.schema
             )
             # Create the FTS index after table creation is complete
-            # Check if FTS index already exists to avoid recreation
-            if self.fts_column not in [idx['name'] for idx in self.table.list_indices()]:
-                self.table.create_fts_index(self.fts_column)
+            self.table.create_fts_index(self.fts_column)
         else:
             # Check which IDs already exist
             ids_to_check = df[id_column].tolist()
